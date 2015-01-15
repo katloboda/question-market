@@ -1,0 +1,13 @@
+== QuestionMarket
+
+QuestionMarket is a backend platform for storing questions and answers.
+
+=== Configuration
+==== Settings files
+* Create .yml versions of all config/*.yml.example files
+* generate secret keys (see secrets.yml.example)
+==== Database
+* install postgres
+* run postgres (set up agent, or run manually)
+* rake db:create:all
+* rake db:migrate -- or use taps gem if required to pull records from another (e.g. sqlite3) db

@@ -1,0 +1,6 @@
+diff a/app/models/question.rb b/app/models/question.rb	(rejected hunks)
+@@ -1,3 +1,4 @@
+ class Question < ActiveRecord::Base
+   has_many :answers
++  accepts_nested_attributes_for :answers
+ end
