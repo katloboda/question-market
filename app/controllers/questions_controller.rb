@@ -22,6 +22,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     logger.debug "QUESTION for destroy: #{@question}"
     @question.destroy
+    render status: 200, json: @controller.to_json
 
   end
 
