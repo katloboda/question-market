@@ -9,8 +9,18 @@ class QuestionsController < ApplicationController
       question.answers << Answer.new(a.permit(:text))
     end
     question.save
-    # Does this need .to_json() if it is called as render json: ?
+    logger.debug "QUESTION created: #{question}"
+    logger.debug "ID of Question created: #{question.id}"
     render json: question.to_json(:include => :answers)
+  end
+
+
+  def destroy
+    @question = Question.find(params[:id])
+    logger.debug "QUESTION for destroy: #{@question}"
+    @question.destroy
+    render status: 200, json: @controller.to_json
+
   end
 
 end
