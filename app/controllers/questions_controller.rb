@@ -47,8 +47,10 @@ class QuestionsController < ApplicationController
   def destroy
     question = Question.find(params[:id])
     logger.debug "QUESTION for destroy: #{question}"
-    question.destroy
-    render status: 200, json: {}
+    if question.destroy
+      render status: 200, json: {}
+    else
+      render status: 400, json: {}
+    end
   end
-
 end
