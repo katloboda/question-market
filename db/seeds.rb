@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Loads the root question group; this name can be changed via the console or the UI
+# after loading the seed data
+QuestionGroup.create(id: 1, name: 'Root')

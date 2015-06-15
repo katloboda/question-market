@@ -4,17 +4,16 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    render json: Question.find(params[:id]), :include => :answers
+    render json: Question.find(params[:id]), :include => [:answers, :question_group]
   end
 
   def create
-    question = Question.new(params.require(:question).permit(:text, :user_id))
+    question = Question.new(params.require(:question).permit(:text, :user_id, :question_group_id))
     params[:answers].each do |a|
       question.answers << Answer.new(a.permit(:text))
     end
     question.save
     logger.debug "QUESTION created: #{question}"
-    logger.debug "ID of Question created: #{question.id}"
     render json: question.to_json(:include => :answers)
   end
 
@@ -25,7 +24,7 @@ class QuestionsController < ApplicationController
   #   This could be ameliorated by using PUT instead of PATCH, or possibly on the frontend checking the newer of those
   #   two values and using that in the UI to show last time that set of things changed.
   def update
-    question_params = params.require(:question).permit(:text, :id)
+    question_params = params.require(:question).permit(:text, :id, :question_group_id)
     user_params = params.require(:user).permit(:id, :role)
     question = Question.find(params[:id])
     # authorization
